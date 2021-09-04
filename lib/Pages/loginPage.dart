@@ -1,21 +1,13 @@
  import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
  class LoginScreen extends StatelessWidget{
    @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          ListTile(
-            leading: Icon(
-              Icons.backspace,
-              size: 20.0,
-              
-            ),
-            title: Text('Login Screen'),
-            
-          )
-        ],
+        leading: Icon(Icons.backspace),
+        title: Text('login screen'),
       ),
       
       body: Padding(
@@ -28,6 +20,15 @@
             SizedBox(
               height: 15
             ),
+            Text('To access more, please login',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontFamily: GoogleFonts.lato()
+            ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
             Column(
               children: [
             TextFormField(
@@ -35,7 +36,8 @@
                 hintText: ('enter user name'),
                 labelText: ('User Name'),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(40),
+
 
                 ),
 
@@ -46,6 +48,7 @@
                 hintText: 'enter password',
                 labelText: 'Password',
                 errorText: 'wrong password',
+                fillColor: Colors.black26,
 
               ),
             ),
