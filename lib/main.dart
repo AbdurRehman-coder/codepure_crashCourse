@@ -9,10 +9,14 @@ import 'package:flutter/material.dart';
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-
+      darkTheme: ThemeData.dark(),
+       theme: ThemeData(
+         primaryColor: Colors.indigo,
+         brightness: Brightness.light
+       ),
       routes: {
         '/': (context) => LoginScreen(),
-        '/HomeScree': (context) =>HomeScreen(),
+        '/LoginScreen': (context) => HomeScreen(),
       },
     );
   }
