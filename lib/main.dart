@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
     return MaterialApp(
       darkTheme: ThemeData.dark(),
        theme: ThemeData(
-         primaryColor: Colors.indigo,
+         primarySwatch: Colors.indigo,
          brightness: Brightness.light
        ),
       routes: {
