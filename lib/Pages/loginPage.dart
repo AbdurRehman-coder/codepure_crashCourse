@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: (){
-                print('onpressed event');
+                print('pressed the login button');
               },
               child: Text('Login'),
             )
