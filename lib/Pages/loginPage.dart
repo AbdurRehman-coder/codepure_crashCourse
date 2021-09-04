@@ -22,7 +22,7 @@ import 'package:google_fonts/google_fonts.dart';
               height: 15
             ),
             Text('To access more, please login',
-            style: GoogleFonts.lato(
+        style: GoogleFonts.lato(
               textStyle: Theme.of(context).textTheme.headline6,
               fontWeight: FontWeight.w700,
             )
