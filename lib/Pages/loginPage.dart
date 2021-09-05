@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.center,
              decoration: BoxDecoration(
                  color: Colors.indigo,
-                 borderRadius: BorderRadius.circular(10),
+                 borderRadius: BorderRadius.circular(ifChange? 50 : 10),
 
 
 
