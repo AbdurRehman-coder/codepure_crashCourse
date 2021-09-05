@@ -1,4 +1,3 @@
-
 import 'package:crash_course/utils/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,13 +11,24 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String user_name = '';
   bool ifChange = false;
+
+  final _keyform = GlobalKey<FormState>();
+
+  moveToHome(BuildContext context) async {
+    if (_keyform.currentState!.validate()) {
+      setState(() {
+        ifChange = true;
+      });
+      await Future.delayed(Duration(seconds: 1));
+      await Navigator.pushNamed(context, MyRoutes.homeScreenRoute);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.backspace),
+        leading: Icon(Icons.keyboard_backspace),
         title: Text('login screen'),
       ),
       body: SingleChildScrollView(
@@ -40,87 +50,102 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 10,
               ),
-              Column(children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: ('enter user name'),
-                    labelText: ('User Name'),
-
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(40),
-
-                    ),
-                  ),
-                  onChanged: (value){
-                    setState(() {
-                      user_name = value;
-                    });
-                  },
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                      hintText: 'enter password',
-                      labelText: 'Password',
-                      fillColor: Colors.black26,
+              Column(
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: ('enter user name'),
+                      labelText: ('User Name'),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 3.0,
+                          color: Colors.blue
+                        ),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
                       focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 3,
+                        color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(40),
-                      )),
-                ),
-              ],),
+                      ),
+                    ),
+                    validator: (value){
+
+                      if(value != null){
+                        return 'enter the user name';
+                      }
+                      else {
+                        return null;
+                      }
+                    },
+                    onChanged: (value) {
+                      setState(() {
+                        user_name = value;
+                      });
+                    },
+
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                        hintText: 'enter password',
+                        labelText: 'Password',
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 3,
+                          color: Colors.blue),
+                          borderRadius: BorderRadius.circular(25)
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 3,
+                          color: Colors.deepPurple),
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                    ),
+                    validator: (value){
+                      if(value != null){
+                        return 'Please enter password';
+                      }
+                      else if(value!.length<6){
+                        return 'password length must be at least 6';
+                      }
+                      else
+                        return null;
+                      },
+                  ),
+                ],
+              ),
               SizedBox(
                 height: 15,
-               ),
-
-              InkWell(
-                onTap: () async {
-                  setState(() {
-                    ifChange = true;
-                  });
-                  await Future.delayed(Duration(seconds: 1));
-                  Navigator.pushNamed(context, MyRoutes.homeScreenRoute);
+              ),
+              Material(
+                color: Colors.deepPurple,
+                borderRadius: BorderRadius.circular(ifChange ? 50 : 10),
+                child: InkWell(
+                onTap: (){
+                moveToHome(context);
                 },
-                child: AnimatedContainer(
-                  duration: Duration(seconds: 1),
-                  curve: Curves.fastOutSlowIn,
-                  width: ifChange? 40 : 150,
-                  height: 50,
-                  child: ifChange? Icon(
-                    Icons.done
-                  ) : Text('Login',
-                  style: GoogleFonts.lato(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
+                  child: AnimatedContainer(
+                    duration: Duration(seconds: 1),
+                    curve: Curves.fastOutSlowIn,
+                    width: ifChange ? 40 : 150,
+                    height: 50,
+                    child: ifChange
+                        ? Icon(Icons.done)
+                        : Text(
+                            'Login',
+                            style: GoogleFonts.lato(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
+                          ),
+                    alignment: Alignment.center,
                   ),
-                  ),
-                  alignment: Alignment.center,
-             decoration: BoxDecoration(
-                 color: Colors.indigo,
-                 borderRadius: BorderRadius.circular(ifChange? 50 : 10),
-
-
-
-
-             ),
-
-
-
-
                 ),
               ),
-
-
-
-              // ElevatedButton(
-              //   onPressed: (){
-              //     Navigator.pushNamed(context, MyRoutes.homeScreenRoute);
-              //   },
-              //   child: Text('Login'),
-              // ),
             ],
           ),
         ),
