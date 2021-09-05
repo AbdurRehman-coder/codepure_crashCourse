@@ -1,4 +1,5 @@
  import 'package:crash_course/Pages/loginPage.dart';
+import 'package:crash_course/utils/routes.dart';
 import 'package:flutter/material.dart';
  import 'package:crash_course/Pages/homeScreen.dart';
  void main(){
@@ -16,7 +17,9 @@ import 'package:flutter/material.dart';
        ),
       routes: {
         '/': (context) => LoginScreen(),
-        '/LoginScreen': (context) => HomeScreen(),
+        MyRoutes.homeScreenRoute: (context) => HomeScreen(),
+        MyRoutes.loginScreenRout: (context) => LoginScreen(),
+
       },
     );
   }

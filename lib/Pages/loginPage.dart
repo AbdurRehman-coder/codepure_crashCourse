@@ -1,3 +1,5 @@
+import 'package:crash_course/Pages/homeScreen.dart';
+import 'package:crash_course/utils/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -54,14 +56,39 @@ class LoginScreen extends StatelessWidget {
               ),
             ],),
             SizedBox(
-              height: 10,
+              height: 15,
+             ),
+
+            Container(
+              height: 50,
+              width: 150,
+              child: Text('Login',
+              style: GoogleFonts.lato(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+
+
+              ),),
+              alignment: Alignment.center,
+           decoration: BoxDecoration(
+             color: Colors.indigo,
+             borderRadius: BorderRadius.circular(10),
+
+           ),
+
+
+
             ),
-            ElevatedButton(
-              onPressed: (){
-                print('pressed the login button');
-              },
-              child: Text('Login'),
-            )
+
+
+
+            // ElevatedButton(
+            //   onPressed: (){
+            //     Navigator.pushNamed(context, MyRoutes.homeScreenRoute);
+            //   },
+            //   child: Text('Login'),
+            // ),
           ],
         ),
       ),
