@@ -1,3 +1,4 @@
+// @dart = 2.9
  import 'package:crash_course/Pages/loginPage.dart';
 import 'package:crash_course/utils/routes.dart';
 import 'package:flutter/material.dart';
