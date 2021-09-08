@@ -76,8 +76,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(40),
                         ),
                       ),
+                      // add null safety to validation
                       validator: (String? value){
-
+                        //if we write only value.isEmpty then it will show
+                        //null safety error and if resolve it with '!' this
+                        //sign it will effect the code compilation because we
+                        //want null to be return if validation have successfully
+                        // done.
                         if(value == null || value.isEmpty){
                           return ' please enter the user name';
                         }
