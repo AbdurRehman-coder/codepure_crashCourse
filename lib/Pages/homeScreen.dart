@@ -1,4 +1,5 @@
- import 'package:flutter/material.dart';
+ import 'package:crash_course/widgets/drawer.dart';
+import 'package:flutter/material.dart';
  class HomeScreen extends StatelessWidget{
 
    @override
@@ -13,6 +14,7 @@
           'welcome to the home screen'
         ),
       ),
+      drawer: MyDrawer(),
     );
   }
  }

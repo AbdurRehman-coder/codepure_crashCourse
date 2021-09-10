@@ -11,13 +11,14 @@ import 'package:flutter/material.dart';
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-      darkTheme: ThemeData.dark(),
+
        theme: ThemeData(
-         primarySwatch: Colors.indigo,
+         // primarySwatch: Colors.indigo,
+         // primaryColor: Colors.deepPurple,
          brightness: Brightness.light
        ),
+      initialRoute: MyRoutes.homeScreenRoute,
       routes: {
-        '/': (context) => LoginScreen(),
         MyRoutes.homeScreenRoute: (context) => HomeScreen(),
         MyRoutes.loginScreenRout: (context) => LoginScreen(),
 

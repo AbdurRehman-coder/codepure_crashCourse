@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         //sign it will effect the code compilation because we
                         //want null to be return if validation have successfully
                         // done.
-                        if(value == null || value.isEmpty){
+                        if( value == null || value.isEmpty){
                           return ' please enter the user name';
                         }
                         else {
