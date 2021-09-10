@@ -13,8 +13,8 @@ import 'package:flutter/material.dart';
     return MaterialApp(
 
        theme: ThemeData(
-         // primarySwatch: Colors.indigo,
-         // primaryColor: Colors.deepPurple,
+         primarySwatch: Colors.indigo,
+         primaryColor: Colors.indigo,
          brightness: Brightness.light
        ),
       initialRoute: MyRoutes.homeScreenRoute,
