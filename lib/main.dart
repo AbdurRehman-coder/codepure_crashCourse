@@ -1,6 +1,7 @@
 // @dart = 2.9
  import 'package:crash_course/Pages/loginPage.dart';
 import 'package:crash_course/utils/routes.dart';
+import 'package:crash_course/widgets/Theme.dart';
 import 'package:flutter/material.dart';
  import 'package:crash_course/Pages/homeScreen.dart';
  void main(){
@@ -12,11 +13,7 @@ import 'package:flutter/material.dart';
     // TODO: implement build
     return MaterialApp(
 
-       theme: ThemeData(
-         primarySwatch: Colors.indigo,
-         primaryColor: Colors.indigo,
-         brightness: Brightness.light
-       ),
+       theme: MyTheme.lightTheme(context),
       initialRoute: MyRoutes.homeScreenRoute,
       routes: {
         MyRoutes.homeScreenRoute: (context) => HomeScreen(),

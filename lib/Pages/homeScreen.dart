@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text('home Screen'),
-      ),
+        title: Text('catalog App',
+       ),
+       ),
       body: Center(
         child:  Text(
           'welcome to the home screen'
