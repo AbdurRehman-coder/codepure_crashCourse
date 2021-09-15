@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-
+debugShowCheckedModeBanner: false,
        theme: MyTheme.lightTheme(context),
       initialRoute: MyRoutes.homeScreenRoute,
       routes: {
