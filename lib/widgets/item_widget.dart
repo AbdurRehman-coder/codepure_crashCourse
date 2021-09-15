@@ -10,10 +10,12 @@ class ItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.all(16.0),
       child: Card(
+       
         shadowColor: Colors.red,
         child: ListTile(
+          color: Colors.indego,
           leading: Image.network(item.image),
           title: Text(item.name),
           subtitle: Text(item.desc),
