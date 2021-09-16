@@ -3,17 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyTheme{
+
   static ThemeData lightTheme(BuildContext context) =>    ThemeData(
       primaryColor: Colors.teal,
       primarySwatch: Colors.teal,
-      textTheme: GoogleFonts.aBeeZeeTextTheme(
-        Theme
-            .of(context)
-            .textTheme
-            .apply(
-          bodyColor: Colors.black,
-        ),
-      ),
       appBarTheme: AppBarTheme(
         color: Colors.white,
         textTheme: GoogleFonts.workSansTextTheme(
