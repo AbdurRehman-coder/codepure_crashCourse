@@ -16,7 +16,7 @@ debugShowCheckedModeBanner: false,
        theme: MyTheme.lightTheme(context),
       initialRoute: MyRoutes.homeScreenRoute,
       routes: {
-        MyRoutes.homeScreenRoute: (context) => HomeScreen(),
+        MyRoutes.homeScreenRoute: (context) => HomePage(),
         MyRoutes.loginScreenRout: (context) => LoginScreen(),
 
       },

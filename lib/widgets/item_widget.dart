@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class ItemWidget extends StatelessWidget {
   Item item;
 
-  ItemWidget({required this.item}) ;
+  ItemWidget({ this.item}) ;
 
   @override
   Widget build(BuildContext context) {

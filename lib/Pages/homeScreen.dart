@@ -1,51 +1,125 @@
- import 'dart:convert';
 
 import 'package:crash_course/moduls/catalog.dart';
 import 'package:crash_course/widgets/drawer.dart';
 import 'package:crash_course/widgets/item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
- class HomeScreen extends StatefulWidget{
+import 'dart:convert';
+
+class HomePage extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  CatalogModul catalogModul = CatalogModul();
+class _HomePageState extends State<HomePage> {
+  final int days = 30;
 
-@override
+  final String name = "Codepur";
+
+  @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     loadData();
   }
+
   loadData() async {
-  final catalogjson = await rootBundle.loadString('assets/catalogJson.json');
-  final decodeData = jsonDecode(catalogjson);
-  var productData = decodeData['products'];
-catalogModul.items = List.from(productData).map<Item>((item) => item.fromMap(item)).toList();
+    await Future.delayed(Duration(seconds: 2));
+    final catalogJson =
+    await rootBundle.loadString("assets/catalogJson.json");
+    final decodedData = jsonDecode(catalogJson);
+    var productsData = decodedData["products"];
+    CatalogModel.items = List.from(productsData)
+        .map<Item>((item) => Item.fromMap(item))
+        .toList();
+    setState(() {});
+  }
 
-}
-
-
-   @override
+  @override
   Widget build(BuildContext context) {
-     final copyLists = List.generate(30, (index) => catalogModul.items[0]);
-
-     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text('catalog App',
-       ),
-       ),
-      body: ListView.builder(
-        itemCount: copyLists.length,
-          itemBuilder: (context, index){
-           return ItemWidget(
-            item: copyLists[index],
-          );
-        }),
+        title: Text("Catalog App"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
+            ? ListView.builder(
+          itemCount: CatalogModel.items.length,
+          itemBuilder: (context, index) => ItemWidget(
+            item: CatalogModel.items[index],
+          ),
+        )
+            : Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
       drawer: MyDrawer(),
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  import 'dart:convert';
+//
+// import 'package:crash_course/moduls/catalog.dart';
+// import 'package:crash_course/widgets/drawer.dart';
+// import 'package:crash_course/widgets/item_widget.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
+//  class HomeScreen extends StatefulWidget{
+//   @override
+//   _HomeScreenState createState() => _HomeScreenState();
+// }
+//
+// class _HomeScreenState extends State<HomeScreen> {
+//   CatalogModel catalogModel = CatalogModel();
+//
+// @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//     loadData();
+//   }
+//   Future loadData() async {
+//   Future.delayed(Duration(seconds: 2));
+//   final catalogjson = await rootBundle.loadString('assets/catalogJson.json');
+//   final decodeData = jsonDecode(catalogjson);
+//   var productData = decodeData['products'];
+// CatalogModel.items = List.from(productData).map<Item>((item) => item.fromMap(item)).toList();
+// setState(() {});
+//
+// }
+//
+//
+//    @override
+//   Widget build(BuildContext context) {
+//      // TODO: implement build
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('catalog App',
+//        ),
+//        ),
+//       body: (CatalogModel.items != null && CatalogModel.items.isEmpty)? ListView.builder(
+//         itemCount: CatalogModel.items.length,
+//           itemBuilder: (context, index){
+//            return ItemWidget(
+//             item: CatalogModel.items[index],
+//           );
+//         }): Center(
+//         child: CircularProgressIndicator(),
+//       ),
+//       drawer: MyDrawer(),
+//     );
+//   }
+//}
