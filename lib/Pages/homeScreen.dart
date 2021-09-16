@@ -42,11 +42,11 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
+        child: (CatalogModel.items != null && CatalogModel.items!.isNotEmpty)
             ? ListView.builder(
-          itemCount: CatalogModel.items.length,
+          itemCount: CatalogModel.items!.length,
           itemBuilder: (context, index) => ItemWidget(
-            item: CatalogModel.items[index],
+            item: CatalogModel.items![index],
           ),
         )
             : Center(

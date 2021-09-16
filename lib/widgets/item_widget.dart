@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class ItemWidget extends StatelessWidget {
   Item item;
 
-  ItemWidget({ this.item}) ;
+  ItemWidget({ required this.item}) ;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class ItemWidget extends StatelessWidget {
         child: ListTile(
           leading: Image.network(item.image),
           title: Text(item.name,
-          textScaleFactor: 1.4,
+          textScaleFactor: 1.2,
           style: TextStyle(
           // fontSize: 50,
 
