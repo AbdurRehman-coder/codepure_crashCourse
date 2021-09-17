@@ -2,9 +2,13 @@
 import 'package:crash_course/moduls/catalog.dart';
 import 'package:crash_course/widgets/drawer.dart';
 import 'package:crash_course/widgets/item_widget.dart';
+import 'package:crash_course/widgets/gridWidget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
+import "package:velocity_x/velocity_x.dart";
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,10 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final int days = 30;
-
-  final String name = "Codepur";
-
   @override
   void initState() {
     super.initState();
@@ -33,7 +33,6 @@ class _HomePageState extends State<HomePage> {
         .toList();
     setState(() {});
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,11 +42,19 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: (CatalogModel.items != null && CatalogModel.items!.isNotEmpty)
-            ? ListView.builder(
-          itemCount: CatalogModel.items!.length,
-          itemBuilder: (context, index) => ItemWidget(
-            item: CatalogModel.items![index],
-          ),
+            ? GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 15,
+            ),
+            itemCount: CatalogModel.items!.length,
+            itemBuilder: (BuildContext context, index){
+              var item = CatalogModel.items![index];
+              return GridWidget(
+                  gridItem: item,
+              );
+            }
         )
             : Center(
           child: CircularProgressIndicator(),
@@ -57,69 +64,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//  import 'dart:convert';
-//
-// import 'package:crash_course/moduls/catalog.dart';
-// import 'package:crash_course/widgets/drawer.dart';
-// import 'package:crash_course/widgets/item_widget.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-//  class HomeScreen extends StatefulWidget{
-//   @override
-//   _HomeScreenState createState() => _HomeScreenState();
-// }
-//
-// class _HomeScreenState extends State<HomeScreen> {
-//   CatalogModel catalogModel = CatalogModel();
-//
-// @override
-//   void initState() {
-//     // TODO: implement initState
-//     super.initState();
-//     loadData();
-//   }
-//   Future loadData() async {
-//   Future.delayed(Duration(seconds: 2));
-//   final catalogjson = await rootBundle.loadString('assets/catalogJson.json');
-//   final decodeData = jsonDecode(catalogjson);
-//   var productData = decodeData['products'];
-// CatalogModel.items = List.from(productData).map<Item>((item) => item.fromMap(item)).toList();
-// setState(() {});
-//
-// }
-//
-//
-//    @override
-//   Widget build(BuildContext context) {
-//      // TODO: implement build
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('catalog App',
-//        ),
-//        ),
-//       body: (CatalogModel.items != null && CatalogModel.items.isEmpty)? ListView.builder(
-//         itemCount: CatalogModel.items.length,
-//           itemBuilder: (context, index){
-//            return ItemWidget(
-//             item: CatalogModel.items[index],
-//           );
-//         }): Center(
-//         child: CircularProgressIndicator(),
-//       ),
-//       drawer: MyDrawer(),
-//     );
-//   }
-//}

@@ -18,7 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   moveToHome(BuildContext context) async {
     final form = _keyForm.currentState;
-    if (form.validate()) {
+    if (form!.validate()) {
       form.save();
       setState(() {
         ifChange = true;
@@ -77,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       // add null safety to validation
-                      validator: (String value){
+                      validator: (String? value){
                         //if we write only value.isEmpty then it will show
                         //null safety error and if resolve it with '!' this
                         //sign it will effect the code compilation because we
@@ -116,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(40),
                           ),
                       ),
-                      validator:(String value){
+                      validator:(String? value){
                         if(value == null || value.isEmpty){
                           return 'Please enter password';
                         }
