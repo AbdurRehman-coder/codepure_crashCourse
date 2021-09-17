@@ -1,5 +1,7 @@
 
+
 import 'package:crash_course/moduls/catalog.dart';
+import 'package:crash_course/widgets/Theme.dart';
 import 'package:crash_course/widgets/drawer.dart';
 import 'package:crash_course/widgets/item_widget.dart';
 import 'package:crash_course/widgets/gridWidget.dart';
@@ -35,32 +37,115 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Catalog App"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: (CatalogModel.items != null && CatalogModel.items!.isNotEmpty)
-            ? GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 15,
-              mainAxisSpacing: 15,
-            ),
-            itemCount: CatalogModel.items!.length,
-            itemBuilder: (BuildContext context, index){
-              var item = CatalogModel.items![index];
-              return GridWidget(
-                  gridItem: item,
-              );
-            }
-        )
-            : Center(
-          child: CircularProgressIndicator(),
+      body: SafeArea(
+        child:  Container(
+          padding: Vx.mV16,
+          margin: Vx.mH12,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+            // CatalogHeader(),
+              if( CatalogModel.items != null && CatalogModel.items!.isNotEmpty)
+                CatalogList().expand()
+
+              else Center(
+                  child: CircularProgressIndicator(),
+                )
+
+
+            ],
+          ),
         ),
       ),
-      drawer: MyDrawer(),
     );
+  }
+}
+class CatalogHeader extends StatelessWidget{
+@override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Column(
+      children: [
+        "Catalog App".text.bold.xl3.make(),
+        'Trending Proguct'.text.black.xl.make(),
+      ],
+    );
+  }
+}
+class CatalogList extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return ListView.builder(
+        itemCount: CatalogModel.items!.length,
+      itemBuilder: (BuildContext context, int index) {
+          final catalogData = CatalogModel.items![index];
+          return CatalogItem(catalog: catalogData,);
+
+      },
+    );
+  }
+}
+class CatalogItem extends StatelessWidget{
+  final Item catalog;
+  CatalogItem({required this.catalog});
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return VxBox(
+      child: Card(
+        child: Row(
+          children: [
+            CatalogImage( image: catalog.image),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      catalog.name.text.bold.medium.color(Colors.blueGrey).make(),
+                      catalog.desc.text.textStyle(context.captionStyle!).make(),
+                    ],
+                  ),
+                  ButtonBar(
+                    alignment: MainAxisAlignment.spaceBetween,
+                   children: [
+                     '\$${catalog.price}'.text.medium.make(),
+                      ElevatedButton(
+                          onPressed: (){
+                          },
+                       style: ButtonStyle(
+                         backgroundColor: MaterialStateProperty.all(MyTheme.darkBlushColor),
+                       ),
+                          child: 'Buy'.text.medium.make(),
+                      ),
+                   ],
+                  ),
+                ],
+              ),
+            )
+          ],
+
+        ).backgroundColor(Colors.white10),
+      ),
+    ).white.square(130).make();
+  }
+}
+// class for Image ( network image)
+class CatalogImage extends StatelessWidget{
+  late final String image;
+  CatalogImage({required this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Image.network(
+      image,
+    ).box.rounded.p16.color(MyTheme.creamColor).make().p8();
   }
 }
