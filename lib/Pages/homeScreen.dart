@@ -1,8 +1,10 @@
 
+
 import 'package:crash_course/moduls/catalog.dart';
-import 'package:crash_course/widgets/drawer.dart';
-import 'package:crash_course/widgets/item_widget.dart';
-import 'package:crash_course/widgets/gridWidget.dart';
+import 'package:crash_course/utils/routes.dart';
+import 'package:crash_course/widgets/Theme.dart';
+import 'package:crash_course/widgets/productDetailPage/catalog_header.dart';
+import 'package:crash_course/widgets/productDetailPage/catalog_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     loadData();
+
   }
 
   loadData() async {
@@ -35,32 +38,61 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
+    int cartCount = 3;
+    // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Catalog App"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: (CatalogModel.items != null && CatalogModel.items!.isNotEmpty)
-            ? GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 15,
-              mainAxisSpacing: 15,
+      floatingActionButton: Stack(
+          alignment: Alignment.topRight,
+          children: <Widget>[
+
+
+            Icon(
+              Icons.shopping_cart,
+
             ),
-            itemCount: CatalogModel.items!.length,
-            itemBuilder: (BuildContext context, index){
-              var item = CatalogModel.items![index];
-              return GridWidget(
-                  gridItem: item,
-              );
-            }
-        )
-            : Center(
-          child: CircularProgressIndicator(),
+            if (cartCount >= 0)
+              Padding(
+                padding: const EdgeInsets.only(left: 2.0),
+                child: CircleAvatar(
+                  radius: 8.0,
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                  child: Text(
+                    cartCount.toString(),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12.0,
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+
+
+
+      body: SafeArea(
+        bottom: false,
+        top: false,
+        child:  Container(
+         // padding: Vx.mV16,
+          margin: Vx.mH12,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+             CatalogHeader(),
+              if( CatalogModel.items != null && CatalogModel.items!.isNotEmpty)
+                CatalogList().expand()
+
+              else Center(
+                      child: CircularProgressIndicator(),
+                    ).expand(),
+
+
+            ],
+          ),
         ),
       ),
-      drawer: MyDrawer(),
     );
   }
 }
