@@ -13,19 +13,21 @@ class ProductDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).cardColor,
       bottomNavigationBar: Container(
-        color: MyTheme.creamColor,
+        color: Theme.of(context).canvasColor,
         child: ButtonBar(
 
           alignment: MainAxisAlignment.spaceBetween,
           children: [
             '\$${catalog.price}'.text.medium.make(),
             ElevatedButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                    MyTheme.darkBlushColor),
+              style: ElevatedButton.styleFrom(
+                shape: StadiumBorder(),
+                //fixedSize: Size.fromWidth(20)
               ),
+              onPressed: () {},
+
               child: 'Buy'.text.medium.make(),
             ),
           ],
@@ -38,6 +40,7 @@ class ProductDetailPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
+               color: Theme.of(context).cardColor,
               height: 300,
               child: Hero(
                   tag: Key(catalog.id.toString()),
@@ -46,13 +49,13 @@ class ProductDetailPage extends StatelessWidget {
             ).py16(),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: VxArc(
                   height: 25,
                   arcType: VxArcType.CONVEY,
                   edge: VxEdge.TOP,
                   child: Container(
-                    color: MyTheme.creamColor,
+                    color: Theme.of(context).canvasColor,
                     child: Padding(
                       padding: const EdgeInsets.all(32.0),
                       child: Column(

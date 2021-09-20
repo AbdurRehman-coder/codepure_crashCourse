@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     loadData();
+
   }
 
   loadData() async {
@@ -37,15 +38,41 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
+    int cartCount = 3;
     // TODO: implement build
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.pushNamed(context, MyRoutes.cartPageRout);
-        },
-        child: Icon(CupertinoIcons.cart),
-        backgroundColor: MyTheme.darkBlushColor,
-      ),
+      floatingActionButton: Stack(
+          alignment: Alignment.topRight,
+          children: <Widget>[
+
+
+            Icon(
+              Icons.shopping_cart,
+              size: 40,
+              color: Theme.of(context).accentColor,
+
+            ),
+            if (cartCount >= 0)
+              Padding(
+                padding: const EdgeInsets.only(left: 2.0),
+                child: CircleAvatar(
+                  radius: 8.0,
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                  child: Text(
+                    cartCount.toString(),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12.0,
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+
+
+
       body: SafeArea(
         bottom: false,
         top: false,
@@ -60,8 +87,8 @@ class _HomePageState extends State<HomePage> {
                 CatalogList().expand()
 
               else Center(
-                  child: CircularProgressIndicator(),
-                )
+                      child: CircularProgressIndicator(),
+                    ).expand(),
 
 
             ],

@@ -15,7 +15,9 @@ import 'package:flutter/material.dart';
     // TODO: implement build
     return MaterialApp(
 debugShowCheckedModeBanner: false,
-       theme: MyTheme.lightTheme(context),
+      themeMode: ThemeMode.system,
+      theme: MyTheme.lightTheme(context),
+      darkTheme: MyTheme.darkTheme(context),
       initialRoute: MyRoutes.homeScreenRoute,
       routes: {
         MyRoutes.homeScreenRoute: (context) => HomePage(),

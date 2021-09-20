@@ -8,7 +8,9 @@ import 'package:velocity_x/velocity_x.dart';
 
 import 'catalog_image.dart';
 
+
 class CatalogList extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -24,21 +26,28 @@ class CatalogList extends StatelessWidget {
   }
 }
 
-class CatalogItem extends StatelessWidget {
+class CatalogItem extends StatefulWidget {
+
   final Item catalog;
 
   CatalogItem({required this.catalog});
 
+  @override
+  _CatalogItemState createState() => _CatalogItemState();
+}
+
+class _CatalogItemState extends State<CatalogItem> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return VxBox(
       child: InkWell(
         onTap: () {
+
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ProductDetailPage(catalog: catalog),
+              builder: (context) => ProductDetailPage(catalog: widget.catalog),
             ),
           );
         },
@@ -46,8 +55,8 @@ class CatalogItem extends StatelessWidget {
           child: Row(
             children: [
               Hero(
-                tag: Key(catalog.id.toString()),
-                  child: CatalogImage(image: catalog.image)),
+                tag: Key(widget.catalog.id.toString()),
+                  child: CatalogImage(image: widget.catalog.image)),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,26 +65,30 @@ class CatalogItem extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        catalog.name.text.bold.medium
-                            .color(Colors.blueGrey)
-                            .make(),
-                        catalog.desc.text
-                            .textStyle(context.captionStyle!)
-                            .make(),
+                        Text(widget.catalog.name,
+                        style: Theme.of(context).textTheme.headline4,
+                          ),
+
+                        // widget.catalog.name.text.bold.medium
+                        //     .color(Theme.of(context).accentColor)
+                          //  .make(),
+                        Text(widget.catalog.desc,
+                        style: Theme.of(context).textTheme.subtitle1,),
+
                       ],
                     ),
                     ButtonBar(
                       alignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        '\$${catalog.price}'.text.medium.make(),
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                MyTheme.darkBlushColor),
-                          ),
-                          child: 'Buy'.text.medium.make(),
-                        ),
+                        '\$${widget.catalog.price}'.text.medium.make(),
+
+
+                              ElevatedButton(
+                              onPressed: () {
+                              },
+                              child: 'Add to cart'.text.make(),
+
+                              ),
                       ],
                     ),
                   ],
