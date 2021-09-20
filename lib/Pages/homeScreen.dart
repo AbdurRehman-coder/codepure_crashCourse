@@ -48,8 +48,6 @@ class _HomePageState extends State<HomePage> {
 
             Icon(
               Icons.shopping_cart,
-              size: 40,
-              color: Theme.of(context).accentColor,
 
             ),
             if (cartCount >= 0)
@@ -77,7 +75,7 @@ class _HomePageState extends State<HomePage> {
         bottom: false,
         top: false,
         child:  Container(
-          padding: Vx.mV16,
+         // padding: Vx.mV16,
           margin: Vx.mH12,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
