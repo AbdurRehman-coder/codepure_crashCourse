@@ -11,6 +11,7 @@ class MyTheme {
         cardColor: Colors.white,
         canvasColor: creamColor,
         accentColor: darkBlushColor,
+        primaryColorLight: creamColor,
         appBarTheme: AppBarTheme(
           color: Colors.white,
           // Icon Theme Data
@@ -74,9 +75,11 @@ class MyTheme {
 
   // Theme for Dark Screen
   static ThemeData darkTheme(BuildContext context) => ThemeData(
+        primaryColor: Colors.cyan,
         canvasColor: Colors.grey[900],
         cardColor: Colors.black,
         accentColor: creamColor,
+        primaryColorLight: creamColor,
         //app Bar for dar theme
         appBarTheme: AppBarTheme(
           color: Colors.black54,

@@ -10,9 +10,7 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       title: 'Cart'.text
-           .textStyle(context.textTheme.headline4!)
-           .make(),
+        title: 'Cart'.text.textStyle(context.textTheme.headline4!).make(),
         centerTitle: true,
       ),
       body: Column(
@@ -28,12 +26,11 @@ class CartPage extends StatelessWidget {
 }
 
 //Class for total price of items in cart
-class _CartTotal extends StatelessWidget{
+class _CartTotal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 200,
-
+        height: 100,
         child: ButtonBar(
           alignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.min,
@@ -49,21 +46,31 @@ class _CartTotal extends StatelessWidget{
             // ),
             TextButton(
               onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: 'Buying is not available'
+                        .text.textStyle(context.textTheme.headline4!).black.make(),
+                  backgroundColor: Theme.of(context).primaryColor,
+                  shape: BeveledRectangleBorder(),
+                  duration: Duration(seconds: 2),
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
 
+                ),
+
+                );
               },
               child: 'Buy'.text.make(),
               style: ButtonStyle(
+                  shape: MaterialStateProperty.all(
+                    StadiumBorder(),
+                  ),
+                  foregroundColor: MaterialStateProperty.all(
+                    Theme.of(context).cardColor,
+                  ),
                   backgroundColor: MaterialStateProperty.all(
-                    Theme
-                        .of(context)
-                        .accentColor,
-
-                  )
-              ),
+                    Theme.of(context).accentColor,
+                  )),
             ),
-
           ],
-        )
-    );
+        ));
   }
 }
