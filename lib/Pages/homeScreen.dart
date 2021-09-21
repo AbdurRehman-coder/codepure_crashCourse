@@ -5,6 +5,7 @@ import 'package:crash_course/utils/routes.dart';
 import 'package:crash_course/widgets/Theme.dart';
 import 'package:crash_course/widgets/productDetailPage/catalog_header.dart';
 import 'package:crash_course/widgets/productDetailPage/catalog_list.dart';
+import 'package:crash_course/widgets/radioListTile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -71,14 +72,25 @@ class _HomePageState extends State<HomePage> {
 
 
 
+    // bottomNavigationBar: Container(
+    //     //color: Theme.of(context).canvasColor,
+    // child: ButtonBar(
+    // alignment: MainAxisAlignment.spaceBetween,
+    // children: [
+    //
+    // RadioListClass(),
+    // ],
+    // ),
+    // ),
+
       body: SafeArea(
         bottom: false,
         top: false,
         child:  Container(
-         // padding: Vx.mV16,
+          padding: Vx.mV16,
           margin: Vx.mH12,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
              CatalogHeader(),
               if( CatalogModel.items != null && CatalogModel.items!.isNotEmpty)

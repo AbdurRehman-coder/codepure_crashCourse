@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyTheme {
+
   static ThemeData lightTheme(BuildContext context) => ThemeData(
         primaryColor: Colors.cyan,
         primarySwatch: Colors.teal,
@@ -96,24 +97,26 @@ class MyTheme {
             textStyle: TextStyle(
               color: creamColor,
               fontWeight: FontWeight.bold,
-              fontSize: 25,
+              fontSize: 20,
             ),
           ),
           headline4: GoogleFonts.aBeeZee(
             textStyle: TextStyle(
               color: creamColor,
-              fontSize: 20,
+              fontSize: 15,
               fontWeight: FontWeight.w400,
             ),
           ),
           bodyText1: GoogleFonts.workSans(
             textStyle: TextStyle(
+              fontSize: 13,
               color: creamColor,
             ),
           ),
           subtitle1: GoogleFonts.workSans(
               textStyle: TextStyle(
             color: Colors.white70,
+                fontSize: 12,
           )),
         ),
 

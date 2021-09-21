@@ -54,7 +54,6 @@ class _CatalogItemState extends State<CatalogItem> {
           );
         },
         child: Card(
-          elevation: 20,
           child: Row(
             children: [
               Hero(
@@ -108,6 +107,6 @@ class _CatalogItemState extends State<CatalogItem> {
           ),
         ),
       ),
-    ).square(120).make();
+    ).square(150).make();
   }
 }
