@@ -5,7 +5,6 @@ import 'package:crash_course/utils/routes.dart';
 import 'package:crash_course/widgets/Theme.dart';
 import 'package:crash_course/widgets/productDetailPage/catalog_header.dart';
 import 'package:crash_course/widgets/productDetailPage/catalog_list.dart';
-import 'package:crash_course/widgets/radioListTile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,46 +41,39 @@ class _HomePageState extends State<HomePage> {
     int cartCount = 3;
     // TODO: implement build
     return Scaffold(
-      floatingActionButton: Stack(
-          alignment: Alignment.topRight,
-          children: <Widget>[
+      floatingActionButton: InkWell(
+          onTap: (){
+            Navigator.pushNamed(context,
+                MyRoutes.cartPageRout);
+          },
+        child: Stack(
+            alignment: Alignment.topRight,
+            children: <Widget>[
 
 
-            Icon(
-              Icons.shopping_cart,
-
-            ),
-            if (cartCount >= 0)
-              Padding(
-                padding: const EdgeInsets.only(left: 2.0),
-                child: CircleAvatar(
-                  radius: 8.0,
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
-                  child: Text(
-                    cartCount.toString(),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12.0,
+              Icon(
+                Icons.shopping_cart,
+              ),
+              if (cartCount >= 0)
+                Padding(
+                  padding: const EdgeInsets.only(left: 2.0),
+                  child: CircleAvatar(
+                    radius: 8.0,
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                    child: Text(
+                      cartCount.toString(),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12.0,
+                      ),
                     ),
                   ),
                 ),
-              ),
-          ],
-        ),
+            ],
+          ),
+      ),
 
-
-
-    // bottomNavigationBar: Container(
-    //     //color: Theme.of(context).canvasColor,
-    // child: ButtonBar(
-    // alignment: MainAxisAlignment.spaceBetween,
-    // children: [
-    //
-    // RadioListClass(),
-    // ],
-    // ),
-    // ),
 
       body: SafeArea(
         bottom: false,

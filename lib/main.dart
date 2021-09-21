@@ -4,7 +4,6 @@ import 'package:crash_course/Pages/loginPage.dart';
 import 'package:crash_course/Pages/product_detail_page.dart';
 import 'package:crash_course/utils/routes.dart';
 import 'package:crash_course/widgets/Theme.dart';
-import 'package:crash_course/widgets/themeChangerProvider.dart';
 import 'package:flutter/material.dart';
  import 'package:crash_course/Pages/homeScreen.dart';
 import 'package:provider/provider.dart';
@@ -14,15 +13,9 @@ import 'package:provider/provider.dart';
   class MyApp extends StatelessWidget{
    @override
   Widget build(BuildContext context) {
-     return ChangeNotifierProvider(
-         create: (_) => ThemeChangerScreen(),
-         child: Builder(
-         builder: (BuildContext context)
-     {
-       final themeChanger = Provider.of<ThemeChangerScreen>(context);
        return MaterialApp(
          debugShowCheckedModeBanner: false,
-         themeMode: ThemeMode.system,
+        // themeMode: ThemeMode.system,
          theme: MyTheme.lightTheme(context),
          darkTheme: MyTheme.darkTheme(context),
          initialRoute: MyRoutes.homeScreenRoute,
@@ -35,7 +28,5 @@ import 'package:provider/provider.dart';
          },
        );
      }
-         ),
-     );
-  }
+
   }

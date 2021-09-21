@@ -3,7 +3,7 @@ import 'package:crash_course/utils/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:velocity_x/velocity_x.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -50,10 +50,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 15),
                 Text('Welcome $userName',
-                    style: GoogleFonts.aBeeZee(
-                      textStyle: Theme.of(context).textTheme.headline6,
-                      fontWeight: FontWeight.w700,
-                    )),
+                    style: Theme.of(context).textTheme.headline2,
+                    ),
                 SizedBox(
                   height: 10,
                 ),
@@ -61,8 +59,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     TextFormField(
                       decoration: InputDecoration(
-                        hintText: ('enter user name'),
-                        labelText: ('User Name'),
+                        hintText: 'enter user name',
+                  hintStyle: Theme.of(context).textTheme.headline4,
+                        labelText: 'User Name',
+                            labelStyle: Theme.of(context).textTheme.headline4,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             width: 3.0,
@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(width: 3,
-                          color: Colors.deepPurple),
+                          color: Theme.of(context).accentColor),
                           borderRadius: BorderRadius.circular(40),
                         ),
                       ),
@@ -84,7 +84,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         //want null to be return if validation have successfully
                         // done.
                         if( value == null || value.isEmpty){
-                          return ' please enter the user name';
+                          return 'please enter the user name';
+
                         }
                         else {
                           return null;
@@ -104,10 +105,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       obscureText: true,
                       decoration: InputDecoration(
                           hintText: 'enter password',
+                        hintStyle: Theme.of(context).textTheme.headline4,
                           labelText: 'Password',
+                        labelStyle: Theme.of(context).textTheme.headline4,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(width: 3,
-                            color: Colors.blue),
+                                color: Theme.of(context).accentColor),
+
                             borderRadius: BorderRadius.circular(25)
                           ),
                           focusedBorder: OutlineInputBorder(
