@@ -1,29 +1,42 @@
-import 'package:crash_course/moduls/catalog.dart';
+import 'catalog.dart';
 
 class CartModel {
+  static final cartModel = CartModel._internal();
+
+  CartModel._internal();
+
+  factory CartModel() => cartModel;
+
+  // catalog field
   late CatalogModel _catalog;
 
-  //List of item id's
-  List<Item> itemIds = [];
+  // Collection of IDs - store Ids of each item
+  final List<int> _itemIds = [];
 
-  //Getter for getting value of _catalog
-  CatalogModel get catalogValue => _catalog;
+  // Get Catalog
+  CatalogModel get catalog => _catalog;
 
-// Setter to set value of _catalog
-  set catalogValue(newValue) {
-    _catalog = newValue;
-
-    // item mapping
-    Item getByIds(int id) =>
-        itemIds.firstWhere((element) => element.id == id, orElse: null);
+  set catalog(CatalogModel newCatalog) {
+    assert(newCatalog != null);
+    _catalog = newCatalog;
   }
 
-//Add items itemIds List
-  void add(item) {
-    itemIds.add(item.id);
+  // Get items in the cart
+  List<Item> get items => _itemIds.map((id) => _catalog.getById(id)).toList();
+
+  // Get total price
+  num get totalPrice =>
+      items.fold(0, (total, current) => total + current.price);
+
+  // Add Item
+
+  void add(Item item) {
+    _itemIds.add(item.id);
   }
-  //Remove items from itemIds List
-void remove(item){
-    itemIds.remove(item.id);
-}
+
+  // Remove Item
+
+  void remove(Item item) {
+    _itemIds.remove(item.id);
+  }
 }

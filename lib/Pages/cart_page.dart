@@ -1,99 +1,90 @@
-import 'package:crash_course/moduls/catalog.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:crash_course/moduls/cartModel.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.canvasColor,
       appBar: AppBar(
-        title: 'Cart'.text.textStyle(context.textTheme.headline4!).make(),
-        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        title: "Cart".text.make(),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+
+          children: [
+            _CartList().p32(),
+            _CartTotal(),
+          ],
+        ),
+
+    );
+  }
+}
+
+class _CartTotal extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final _cart = CartModel();
+    return SizedBox(
+      height: 200,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          CartList().p16().expand(),
-          Divider(),
-          _CartTotal(),
+          "\$${_cart.totalPrice}"
+              .text
+              .xl5
+              .color(context.theme.accentColor)
+              .make(),
+          30.widthBox,
+          ElevatedButton(
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: "Buying not supported yet.".text.make(),
+              ));
+            },
+            style: ButtonStyle(
+                backgroundColor:
+                MaterialStateProperty.all(context.theme.buttonColor)),
+            child: "Buy".text.white.make(),
+          ).w32(context)
         ],
       ),
     );
   }
 }
 
-// List of Cart items
-class CartList extends StatefulWidget{
-  Cart createState() => Cart();
-
-}
-class Cart extends State<CartList>{
+class _CartList extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: 7,
-        itemBuilder: (context, index){
-          return ListTile(
-            leading: Icon(Icons.done,
-            size: 20,
-            color: Theme.of(context).accentColor,
-            ),
-            title: Text('item$index',
-            style: Theme.of(context).textTheme.bodyText1,
-            ),
-            trailing: IconButton(
-              icon: Icon(Icons.remove_circle_outline,
-              color: Theme.of(context).accentColor,),
-              onPressed: () {  },
-            ),
-          );
-        }
-    );
-  }
+  __CartListState createState() => __CartListState();
 }
 
-//Class for total price of items in cart
-class _CartTotal extends StatelessWidget {
+class __CartListState extends State<_CartList> {
+  final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        height: 100,
-        child: ButtonBar(
-          alignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.min,
+    return _cart.items.isEmpty
+        ? "Nothing to show".text.xl3.makeCentered()
+        : Column(
           children: [
-            '\$${999}'.text.textStyle(context.textTheme.headline4!).make(),
-            TextButton(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: 'Buying is not available'
-                        .text.textStyle(context.textTheme.headline4!).black.make(),
-                  backgroundColor: Theme.of(context).primaryColor,
-                  shape: BeveledRectangleBorder(),
-                  duration: Duration(seconds: 2),
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-
-                ),
-
-                );
-              },
-              child: 'Buy'.text.make(),
-              style: ButtonStyle(
-                  shape: MaterialStateProperty.all(
-                    StadiumBorder(),
-                  ),
-                  foregroundColor: MaterialStateProperty.all(
-                    Theme.of(context).cardColor,
-                  ),
-                  backgroundColor: MaterialStateProperty.all(
-                    Theme.of(context).accentColor,
-                  )),
+            SingleChildScrollView(
+              child: ListView.builder(
+      itemCount: _cart.items.length,
+      itemBuilder: (context, index) => ListTile(
+              leading: Icon(Icons.done),
+              trailing: IconButton(
+                icon: Icon(Icons.remove_circle_outline),
+                onPressed: () {
+                  _cart.remove(_cart.items[index]);
+                  setState(() {});
+                },
+              ),
+              title: _cart.items[index].name.text.make(),
+      ),
+    ),
             ),
           ],
-        ));
+        );
   }
 }
