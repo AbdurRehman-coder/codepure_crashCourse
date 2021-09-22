@@ -17,10 +17,41 @@ class CartPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Placeholder().p16().expand(),
+          CartList().p16().expand(),
+          Divider(),
           _CartTotal(),
         ],
       ),
+    );
+  }
+}
+
+// List of Cart items
+class CartList extends StatefulWidget{
+  Cart createState() => Cart();
+
+}
+class Cart extends State<CartList>{
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: 7,
+        itemBuilder: (context, index){
+          return ListTile(
+            leading: Icon(Icons.done,
+            size: 20,
+            color: Theme.of(context).accentColor,
+            ),
+            title: Text('item$index',
+            style: Theme.of(context).textTheme.bodyText1,
+            ),
+            trailing: IconButton(
+              icon: Icon(Icons.remove_circle_outline,
+              color: Theme.of(context).accentColor,),
+              onPressed: () {  },
+            ),
+          );
+        }
     );
   }
 }
@@ -36,14 +67,6 @@ class _CartTotal extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             '\$${999}'.text.textStyle(context.textTheme.headline4!).make(),
-            // ElevatedButton(
-            //   style: ElevatedButton.styleFrom(
-            //     shape: StadiumBorder(),
-            //     //fixedSize: Size.fromWidth(20)
-            //   ),
-            //   onPressed: () {},
-            //   child: 'Buy'.text.medium.make(),
-            // ),
             TextButton(
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
