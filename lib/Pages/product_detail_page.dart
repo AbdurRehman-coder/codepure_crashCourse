@@ -1,23 +1,15 @@
 import 'package:crash_course/moduls/catalog.dart';
 import 'package:crash_course/widgets/Theme.dart';
+import 'package:crash_course/widgets/productDetailPage/add_cart_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class ProductDetailPage extends StatefulWidget {
+class ProductDetailPage extends StatelessWidget {
   final Item catalog;
 
-  const ProductDetailPage({Key? key, required this.catalog})
-      : assert(catalog != null),
-        super(key: key);
-
-  @override
-  _ProductDetailPageState createState() => _ProductDetailPageState();
-}
-
-class _ProductDetailPageState extends State<ProductDetailPage> {
-  @override
+  const ProductDetailPage({Key? key, required this.catalog});
   
   @override
   Widget build(BuildContext context) {
@@ -29,18 +21,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       bottomNavigationBar:   ButtonBar(
         alignment: MainAxisAlignment.spaceBetween,
          children: [
-                  '\$${widget.catalog.price}'
+                  '\$${catalog.price}'
                       .text
                       .textStyle(context.textTheme.headline4!)
                       .make(),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: StadiumBorder(),
-                      //fixedSize: Size.fromWidth(20)
-                    ),
-                    onPressed: () {},
-                    child: 'Buy'.text.medium.make(),
-                  ),
+                 AddToCart(catalog: catalog),
     ]
   ),
         body: Column(
@@ -51,9 +36,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 color: Theme.of(context).cardColor,
                 height: 300,
                 child: Hero(
-                    tag: Key(widget.catalog.id.toString()),
+                    tag: Key(catalog.id.toString()),
                     transitionOnUserGestures: true,
-                    child: Image.network(widget.catalog.image)),
+                    child: Image.network(catalog.image)),
               ).py16(),
               Expanded(
                 child: Padding(
@@ -69,11 +54,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            widget.catalog.name.text
+                          catalog.name.text
                                 .textStyle(context.textTheme.headline2!)
                                 .make(),
                             5.heightBox,
-                            widget.catalog.desc.text
+                          catalog.desc.text
                                 .textStyle(context.textTheme.bodyText1!)
 
                                 .make(),

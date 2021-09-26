@@ -1,5 +1,7 @@
 
 
+import 'package:crash_course/core/vxStore.dart';
+import 'package:crash_course/moduls/cartModel.dart';
 import 'package:crash_course/moduls/catalog.dart';
 import 'package:crash_course/utils/routes.dart';
 import 'package:crash_course/widgets/Theme.dart';
@@ -10,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 import "package:velocity_x/velocity_x.dart";
+import 'package:http/http.dart' as http;
 
 
 class HomePage extends StatefulWidget {
@@ -18,6 +21,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final url = "https://api.jsonbin.io/b/604dbddb683e7e079c4eefd3";
   @override
   void initState() {
     super.initState();
@@ -27,8 +31,10 @@ class _HomePageState extends State<HomePage> {
 
   loadData() async {
     await Future.delayed(Duration(seconds: 2));
-    final catalogJson =
-    await rootBundle.loadString("assets/catalogJson.json");
+    // final catalogJson =
+    // await rootBundle.loadString("assets/catalogJson.json");
+    final response = await http.get(Uri.parse(url));
+    final catalogJson = response.body;
     final decodedData = jsonDecode(catalogJson);
     var productsData = decodedData["products"];
     CatalogModel.items = List.from(productsData)
@@ -38,9 +44,10 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
-    int cartCount = 3;
+    final _cart = (VxState.store as MyStore).cart;
     // TODO: implement build
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButton: InkWell(
           onTap: (){
             Navigator.pushNamed(context,
@@ -54,7 +61,6 @@ class _HomePageState extends State<HomePage> {
               Icon(
                 Icons.shopping_cart,
               ),
-              if (cartCount >= 0)
                 Padding(
                   padding: const EdgeInsets.only(left: 2.0),
                   child: CircleAvatar(
@@ -62,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                     backgroundColor: Colors.red,
                     foregroundColor: Colors.white,
                     child: Text(
-                      cartCount.toString(),
+                    _cart!.items.length.toString(),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 12.0,
@@ -80,13 +86,12 @@ class _HomePageState extends State<HomePage> {
         top: false,
         child:  Container(
           padding: Vx.mV16,
-          margin: Vx.mH12,
           child: Column(
-            //crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
              CatalogHeader(),
               if( CatalogModel.items != null && CatalogModel.items!.isNotEmpty)
-                CatalogList().expand()
+                CatalogList().p16().expand()
 
               else Center(
                       child: CircularProgressIndicator(),

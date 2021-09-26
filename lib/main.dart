@@ -2,13 +2,18 @@
  import 'package:crash_course/Pages/cart_page.dart';
 import 'package:crash_course/Pages/loginPage.dart';
 import 'package:crash_course/Pages/product_detail_page.dart';
+import 'package:crash_course/core/vxStore.dart';
 import 'package:crash_course/utils/routes.dart';
 import 'package:crash_course/widgets/Theme.dart';
 import 'package:flutter/material.dart';
  import 'package:crash_course/Pages/homeScreen.dart';
 import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
  void main(){
-   runApp(MyApp());
+   runApp(
+       VxState(
+           store: MyStore(),
+           child: MyApp()));
  }
   class MyApp extends StatelessWidget{
    @override

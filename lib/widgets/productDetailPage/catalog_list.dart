@@ -125,7 +125,28 @@ import 'catalog_image.dart';
 class CatalogList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return !context.isMobile ?
+    GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 16,
+        ),
+      itemCount: CatalogModel.items!.length,
+      itemBuilder: (context, index) {
+        final catalog = CatalogModel.items![index];
+        return InkWell(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProductDetailPage(catalog: catalog),
+            ),
+          ),
+          child: CatalogItem(catalog: catalog),
+        );
+      },
+    )
+    :
+      ListView.builder(
       shrinkWrap: true,
       itemCount: CatalogModel.items!.length,
       itemBuilder: (context, index) {
@@ -159,26 +180,31 @@ class CatalogItem extends StatelessWidget {
               image: catalog.image,
             ),
           ),
+
           Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  catalog.name.text.lg.color(context.accentColor).bold.make(),
-                  catalog.desc.text.textStyle(context.textTheme.bodyText1!).make(),
-                  10.heightBox,
-                  ButtonBar(
-                    alignment: MainAxisAlignment.spaceBetween,
-                    buttonPadding: EdgeInsets.zero,
-                    children: [
-                      "\$${catalog.price}".text.bold.color(context.accentColor).xl.make(),
-                      AddToCart(catalog: catalog),
-                    ],
-                  ).pOnly(right: 8.0)
-                ],
-              ))
+            child: Column(
+
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    catalog.name.text.lg.color(context.accentColor).bold.make(),
+                    catalog.desc.text.textStyle(context.textTheme.bodyText1!).make(),
+                    10.heightBox,
+
+                 ButtonBar(
+                        alignment: MainAxisAlignment.spaceBetween,
+                        buttonPadding: EdgeInsets.zero,
+                        children: [
+                          "\$${catalog.price}".text.bold.color(context.accentColor).xl.make(),
+                          AddToCart(catalog: catalog),
+                        ],
+                      ).pOnly(right: 8.0),
+
+                  ],
+                ),
+          ),
         ],
       ),
-    ).color(context.cardColor).rounded.square(150).make().py16();
+    ).color(context.cardColor).rounded.square(160).make().py16();
   }
 }

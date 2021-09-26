@@ -1,16 +1,18 @@
 import 'dart:convert';
 
+import 'dart:ffi';
+
 class CatalogModel {
   //Singleton Class
-  static final catModel = CatalogModel._internal();
-  CatalogModel._internal();
-  factory CatalogModel() => catModel;
+  // static final catModel = CatalogModel._internal();
+  // CatalogModel._internal();
+  // factory CatalogModel() => catModel;
   //List of items of type Item
   static List<Item>? items;
 
   // Get by id
  Item getById(id)=>
-     items!.firstWhere((element) => element == id, orElse: null );
+     items!.firstWhere((element) => element == id, orElse: null);
 
 //Get by position
 Item getByPosition(int pos) =>  items![pos];
